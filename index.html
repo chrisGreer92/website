@@ -1,26 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello Soon World</title>
-    <style>
-        body {
-            background-color: #00008B;
-            color: white;
-            font-family: Tahoma, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            height: 100vh;
-            margin: 0;
-        }
-        h1 {
-            margin-top: 20vh;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chris Greer | Developer Portfolio</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Tahoma, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #001f3f;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+    }
+    nav {
+      text-align: center;
+      margin-top: 1rem;
+    }
+    nav a {
+      margin: 0 1rem;
+      text-decoration: none;
+      color: #007acc;
+    }
+    section {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    h2 {
+      color: #001f3f;
+    }
+    .job {
+      margin-bottom: 1.5rem;
+    }
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: #666;
+    }
+    .button {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background-color: #007acc;
+      color: white;
+      border-radius: 4px;
+      text-decoration: none;
+      margin-top: 1rem;
+    }
+  </style>
 </head>
 <body>
-    <h1>I Will Say Hello Soon World</h1>
+  <header>
+    <h1>Chris Greer</h1>
+    <p>Developer | Problem Solver | Lifelong Learner</p>
+  </header>
+
+  <nav>
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>Reliable and experienced developer with a track record of building effective solutions to fit user needs. Skilled in applying core computer science principles to solve complex problems. Committed to continuous learning and supporting organisations to achieve their goals.</p>
+    <a class="button" href="/ChrisGreer_CV.pdf" target="_blank">View My Full CV (PDF)</a>
+  </section>
+
+  <section id="experience">
+    <h2>Experience</h2>
+    <div class="job">
+      <h3>Software Developer – HRS Software Ltd</h3>
+      <p><em>July 2018 – Present</em></p>
+      <ul>
+        <li>Built features like an HTML email builder, CV parsing using AI, and automated email importers.</li>
+        <li>Created custom client solutions like document signing and compliance workflows.</li>
+        <li>Worked with APIs (Mailgun, Mailchimp, Broadbean, etc.) and migrated large datasets.</li>
+        <li>Practiced Agile, code reviews, and TDD in a collaborative environment.</li>
+      </ul>
+    </div>
+    <!-- Additional jobs can be added in a similar format -->
+  </section>
+
+  <section id="skills">
+    <h2>Technical Skills</h2>
+    <ul>
+      <li><strong>Languages:</strong> Java, C++, C, Python, SQL, PHP, JavaScript, HTML, CSS</li>
+      <li><strong>Technologies:</strong> Git, Docker, Linux, MySQL, AWS, Gumloop, OR Tools, Z3</li>
+      <li><strong>Other:</strong> Data structures, OOP, Agile, design patterns, TDD</li>
+    </ul>
+  </section>
+
+  <section id="projects">
+    <h2>Notable Contributions & Projects</h2>
+    <ul>
+      <li><strong>Git Lead:</strong> Led Git best practices in an 8-person project building a React Native app with AI-driven 3D modeling.</li>
+      <li><strong>Vice Chair:</strong> Led project meetings and coordinated a group ethics project.</li>
+      <li><strong>Mentor:</strong> Supported students via the UoN Mature Student Mentor Scheme.</li>
+      <li><strong>Projects:</strong> Built a fully animated game in C++, among others (see <a href="https://github.com/chrisGreer92" target="https://github.com/chrisGreer92">GitHub</a>).</li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:Chris.I.Greer@gmail.com">Chris.I.Greer@gmail.com</a></p>
+    <p>Phone: (+44) 79 7790 4132</p>
+    <p>GitHub: <a href="https://github.com/chrisGreer92" target="https://github.com/chrisGreer92">@chrisGreer92</a></p>
+    <p>LinkedIn: <a href="https://linkedin.com/in/chrisgreer1001" target="https://linkedin.com/in/chrisgreer1001">chrisgreer1001</a></p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Chris Greer. All rights reserved.</p>
+  </footer>
 </body>
 </html>
