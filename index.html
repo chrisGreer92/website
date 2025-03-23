@@ -51,29 +51,33 @@
       background-color: #005a99;
     }
     #contact {
-      background-color: #e8f1fc;
-      padding: 2rem;
+      background-color: #001f3f;
+      color: white;
+      padding: 2.5rem;
       border-radius: 8px;
+      text-align: center;
     }
-    #contact a {
-      color: #001f3f;
+    #contact h2 {
+      color: white;
+      margin-bottom: 1.5rem;
+    }
+    .contact-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 auto;
+      max-width: 500px;
+    }
+    .contact-list li {
+      margin: 1rem 0;
+      font-size: 1.1rem;
+    }
+    .contact-list a {
+      color: #66d9ef;
       text-decoration: none;
       font-weight: bold;
     }
-    #contact a:hover {
+    .contact-list a:hover {
       text-decoration: underline;
-    }
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-    .contact-item {
-      background: white;
-      padding: 1rem;
-      border-radius: 6px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
     footer {
       text-align: center;
@@ -97,24 +101,12 @@
 
   <section id="contact">
     <h2>Contact</h2>
-    <div class="contact-grid">
-      <div class="contact-item">
-        <p>Email:</p>
-        <a href="mailto:Chris.I.Greer@gmail.com">Chris.I.Greer@gmail.com</a>
-      </div>
-      <div class="contact-item">
-        <p>Phone:</p>
-        <a href="tel:+447977904132">(+44) 79 7790 4132</a>
-      </div>
-      <div class="contact-item">
-        <p>GitHub:</p>
-        <a href="https://github.com/chrisGreer92" target="_blank">@chrisGreer92</a>
-      </div>
-      <div class="contact-item">
-        <p>LinkedIn:</p>
-        <a href="https://linkedin.com/in/chrisgreer1001" target="_blank">chrisgreer1001</a>
-      </div>
-    </div>
+    <ul class="contact-list">
+      <li>Email: <a href="mailto:Chris.I.Greer@gmail.com" target="_blank">Chris.I.Greer@gmail.com</a></li>
+      <li>Phone: <a href="tel:+447977904132" target="_blank">(+44) 79 7790 4132</a></li>
+      <li>GitHub: <a href="https://github.com/chrisGreer92" target="_blank">@chrisGreer92</a></li>
+      <li>LinkedIn: <a href="https://linkedin.com/in/chrisgreer1001" target="_blank">chrisgreer1001</a></li>
+    </ul>
   </section>
 
   <footer>
