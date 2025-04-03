@@ -24,7 +24,7 @@ body {
     color: #007acc;
   }
   section {
-    max-width: 800px;
+    max-width: 1220px;
     margin: 2rem auto;
     padding: 0 1rem;
   }
@@ -88,8 +88,38 @@ body {
     flex-wrap: wrap;
   }
   
-  .flex-container .highlight-box {
+  .flex-container > .highlight-box {
     width: 540px;
+  }
+
+  .portfolio-section {
+    width: 1144x;
+    margin: 2rem auto;
+  }
+
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    margin-top: 2rem;
+  }
+  
+  .video-item {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .video-item video {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 0.5rem;
+  }
+
+  .video-item img {
+    width: 100%;
+    border-radius: 8px;
+    margin-top: 0.5rem;
   }
   
   
