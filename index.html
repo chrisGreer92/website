@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Chris Greer | Developer Portfolio</title>
-  <link rel="stylesheet" href="style.css?v=2">
+  <link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
   <header>
@@ -32,17 +32,25 @@
     </ul>
   </section>
 </div>
+
 <section class="highlight-box portfolio-section">
   <h2>Portfolio</h2>
-  <p style="font-size: 0.9em; color: #666; margin-top: 0.5em;">
+  <p style="font-size: 0.9em; color: #664; margin-top: 0em;">
     N.B. Still in the process of adding previous projects.
   </p>
 
-  <div class="video-grid">
-    <div class="video-item">
-      <h3>C++ Zombie Shooter</h3>
-      <h4 class="project-tagline">OOP design, Real-time optimisation, Creative gameplay</h4>
-      <div class="video-wrapper">
+  <div class="project-grid">
+    <div class="project-item">
+      <h3>Zombie Shooter</h3>
+      <div class="tech-stack">
+        <span>C++</span>
+        <span>A* Path Finding</span>
+        <span>Optimisation</span>
+        <span>Graphics</span>
+      </div>
+      <!-- <h4 class="project-tagline">C++, OOP design, A* Path Finding, Optimisation</h4> -->
+      
+      <div class="project-wrapper">
         <video controls>
           <source src="media/Demo.mp4" type="video/mp4" />
           Your browser does not support the video tag.
@@ -50,23 +58,36 @@
       </div>
     </div>
 
-    <div class="video-item">
-      <h3>Java Snake Game</h3>
-      <h4 class="project-tagline">Clean architecture, Iterative fixes, Object-Oriented refactoring</h4>
-      <div class="video-wrapper">
-        <video controls>
-          <source src="media/SnakeDemo.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+    <div class="project-item">
+      <h3>Shortest Path Optimisation</h3>
+      <!-- <h4 class="project-tagline">Java, Heuristic Search, Genetic Algorithms</h4> -->
+      <div class="tech-stack">
+        <span>Java</span>
+        <span>Hyper-heuristics</span>
+        <span>Heuristic Search</span>
+        <span>Genetic Algorithms</span>
+      </div>
+      <div class="project-wrapper">
+        <img src="media/GA.jpg" alt="Mobile App Screenshots" />
       </div>
     </div>
+
+    
   </div>
 
-  <div class="video-grid">
-    <div class="video-item">
-      <h3>Java AI Swarm Simulation (Early Stages)</h3>
-      <h4 class="project-tagline">Autonomous agents, Memetic optimisation, Performance tuning</h4>
-      <div class="video-wrapper">
+  <div class="project-grid">
+
+    <div class="project-item">
+      <h3>Inteligent Swarm Simulation (Early Stages)</h3>
+      <!-- <h4 class="project-tagline">Java, Autonomous agents, Memetic optimisation, Performance tuning</h4> -->
+      <div class="tech-stack">
+        <span>Java</span>
+        <span>Swing</span>
+        <!-- <span>Autonomous agents</span> -->
+        <span>Memetic Optimisation</span>
+        <span>Performance Tuning</span>
+      </div>
+      <div class="project-wrapper">
         <video controls>
           <source src="media/Sim.mp4" type="video/mp4" />
           Your browser does not support the video tag.
@@ -74,14 +95,62 @@
       </div>
     </div>
 
-    <div class="video-item">
+    <div class="project-item">
+      <h3>3D Model Reconstruction App</h3>
+      <!-- <h4 class="project-tagline">React Native, Mobile Development, Collaboration</h4> -->
+      <div class="tech-stack">
+        <span>React Native</span>
+        <span>Python</span>
+        <span>Mobile Development</span>
+        <span>Agile Workflow</span>
+        <span>Collaboration</span>
+      </div>
+      <div class="project-wrapper">
+        <img src="media/GroupApp.png" alt="Mobile App Screenshots" />
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="project-grid">
+
+    <div class="project-item">
       <h3>
         Data Visualisation Project 
         (<a href="https://observablehq.com/d/57b1bc965d3c482e" target="_blank">link</a>)
       </h3>
-      <h4 class="project-tagline">Interactive graphs, pattern discovery, visual storytelling</h4>
-      <img src="media/ObservableGraphs.png" alt="Data Visualisation Screenshot" />
+      <!-- <h4 class="project-tagline">Interactive graphs, Pattern discovery, Visual storytelling</h4> -->
+      <div class="tech-stack">
+        <span>Javascript</span>
+        <span>HTML</span>
+        <span>R</span>
+        <span>Interactive Visualisations</span>
+        <span>Visual Storytelling</span>
+      </div>
+      <div class="project-wrapper">
+        <img src="media/ObservableGraphs.png" alt="Data Visualisation Screenshot" />
+      </div>  
     </div>
+    
+
+    <div class="project-item">
+      <h3>Snake Game</h3>
+      <!-- <h4 class="project-tagline">Java, Clean architecture, Iterative fixes, Object-Oriented refactoring</h4> -->
+      <div class="tech-stack">
+        <span>Java</span>
+        <span>Java FX</span>
+        <span>Swing</span>
+        <span>Refactoring</span>
+        <span>Iterative Fixes</span>
+      </div>
+      <div class="project-wrapper">
+        <video controls>
+          <source src="media/SnakeDemo.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+
   </div>
 
 
