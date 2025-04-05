@@ -1,7 +1,7 @@
   body {
     margin: 0;
     font-family: Tahoma, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #333333;
     color: #333;
   }
   header {
@@ -30,6 +30,10 @@
   }
   h2 {
     color: #001f3f;
+    
+  }
+  .highlight-box h2 {
+    text-decoration: underline;
   }
   .button {
     display: inline-block;
@@ -93,7 +97,7 @@
   }
 
   .portfolio-section {
-    width: 1144px;
+    width: 1304px;
     margin: 2rem auto;
   }
 
