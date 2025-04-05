@@ -161,5 +161,15 @@
   <footer>
     <p>&copy; 2025 Chris Greer. All rights reserved.</p>
   </footer>
+  
+  <script>
+    //To avoid ears being blown out, default volume is 30%
+    window.addEventListener('DOMContentLoaded', () => {
+      const videos = document.querySelectorAll('video');
+      videos.forEach(video => {
+        video.volume = 0.3;
+      });
+    });
+  </script>
 </body>
 </html>
