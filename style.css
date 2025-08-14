@@ -178,6 +178,54 @@
     border: none;
   }
 
+
+  /*Booking Box (modal) overlay */
+  .modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Modal Box */
+  .modal-content {
+    background: #fff;
+    color: #333;
+    padding: 1.5rem;
+    border-radius: 8px;
+    width: 350px;
+    max-width: 90%;
+  }
+
+  /* Form labels and inputs */
+  .modal-content label {
+    display: block;
+    margin-top: 0.8rem;
+    font-weight: bold;
+  }
+
+  .modal-content input,
+  .modal-content textarea {
+    width: 100%;
+    padding: 0.4rem;
+    margin-top: 0.3rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 1rem;
+  }
+
+  /* Actions row */
+  .modal-actions {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
+
   
   /* .project-item video {
     width: 100%;
