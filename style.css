@@ -163,6 +163,21 @@
     display: flex;
     flex-direction: column;
   }
+
+/* FullCalendar */
+  .fc {
+    --fc-neutral-bg-color: transparent;
+    --fc-page-bg-color: transparent;
+    --fc-button-bg-color: #0056b3;
+    --fc-button-text-color: #fff;
+    --fc-button-hover-bg-color: #00408d;
+  }
+  .fc .fc-button {
+    font-weight: bold;
+    font-family: inherit;
+    border: none;
+  }
+
   
   /* .project-item video {
     width: 100%;

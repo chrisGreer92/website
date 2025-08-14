@@ -1,15 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Book a Call</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Booking Calendar</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        .highlight-box h2 {text-decoration: none !important;}
+    </style>
 </head>
 <body>
-  <section class="highlight-box" style="max-width: 600px; margin: 3rem auto;">
-    <h2>Coming Soon</h2>
-    <p>Currently building: Personal call booking system using Java Spring Boot as the backend, and integrating with google calendar api.</p>
-  </section>
+<section class="highlight-box" style="max-width: 900px; margin: 2rem auto; position: relative;">
+    <h2>Book a Call</h2>
+    <p>Currently building: Personal call booking system using Java Spring Boot as backend 
+      (see <a href="https://github.com/chrisGreer92/springbootApp" target="_blank">GitHub Project</a>).</p>
+    <a class="button" href="index.html" target="_blank"
+       style="position: absolute; top: 1rem; right: 1rem;">
+        Home
+    </a>
+    <div id="calendar"></div>
+    <!-- Hidden Booking Box-->
+    <!-- <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <h3>Book Slot</h3>
+            <form id="bookingForm">
+                <input type="hidden" name="slotId" id="slotId">
+
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" required>
+
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" required>
+
+                <label for="phone">Phone</label>
+                <input type="tel" name="phone" id="phone" pattern="^[0-9]{7,15}$" title="Must be 7–15 digits">
+
+                <label for="topic">Topic</label>
+                <input type="text" name="topic" id="topic">
+
+                <label for="notes">Notes</label>
+                <textarea name="notes" id="notes" rows="3"></textarea>
+
+                <div class="modal-actions">
+                    <button type="button" id="closeModal" class="button">Cancel</button>
+                    <button type="submit" class="button">Request</button>
+                </div>
+            </form>
+        </div> -->
+    </div>
+</section>
+
+<!-- FullCalendar JS -->
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+<script src="calendar.js"></script>
 </body>
 </html>
