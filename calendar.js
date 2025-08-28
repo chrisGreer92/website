@@ -1,12 +1,16 @@
+const API_BASE = "https://bookingsystem.fly.dev";
+
 document.addEventListener('DOMContentLoaded', function () {
     const calendarEl = document.getElementById('calendar');
+
+    
 
     const params = new URLSearchParams(location.search);
     const adminMode = params.get('admin') === 'true';
 
     const getURL = adminMode
-        ? '/booking/admin?showPast=true&deleted=false&sort=startTime' //Admin gets specific (may tweak)
-        : '/booking/public'; //Public gets the hardcoded return
+        ? API_BASE + "/booking/admin?showPast=true&deleted=false&sort=startTime" //Admin gets specific (may tweak)
+        : API_BASE + "/booking/public"; //Public gets the hardcoded return
 
     const statusColors = {
         available: '#007bff',
@@ -89,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             try {
-                await sendJSON('/booking/admin', 'POST', {
+                await sendJSON(API_BASE + "/booking/admin", 'POST', {
                     startTime: info.startStr,
                     endTime: info.endStr
                 });
