@@ -1,14 +1,45 @@
 const API_BASE = "https://bookingsystem.fly.dev";
+let ADMIN_AUTH = null; //Will be saved when logged in
+let ADMIN_MODE = false; // i.e. ?admin=true or not
 
 document.addEventListener('DOMContentLoaded', function () {
     const calendarEl = document.getElementById('calendar');
 
-    
-
     const params = new URLSearchParams(location.search);
-    const adminMode = params.get('admin') === 'true';
+    
+    ADMIN_MODE = (params.get('admin') === 'true');
+    ADMIN_AUTH = sessionStorage.getItem('ADMIN_AUTH');
 
-    const getURL = adminMode
+    //Button prompts admin mode login
+    const adminLoginBtn = document.getElementById('adminLoginBtn');
+    if (adminLoginBtn) {
+        adminLoginBtn.addEventListener('click', () => {
+
+            if (ADMIN_MODE) {
+                ADMIN_AUTH = null;
+                sessionStorage.removeItem('ADMIN_AUTH');
+                const url = new URL(window.location.href);
+                url.searchParams.delete('admin');
+                window.location.href = url.toString();
+                return;
+            }
+
+            const u = prompt("Admin username:");
+            if (!u) return;
+            const p = prompt("Admin password:");
+            if (p == null) return;
+
+            ADMIN_AUTH = "Basic " + btoa(u + ":" + p);
+            sessionStorage.setItem('ADMIN_AUTH', ADMIN_AUTH);
+
+            // Force admin=true in the URL and reload
+            const url = new URL(window.location.href);
+            url.searchParams.set('admin', 'true');
+            window.location.href = url.toString();
+        });
+    }
+
+    const getURL = ADMIN_MODE
         ? API_BASE + "/booking/admin?showPast=true&deleted=false&sort=startTime" //Admin gets specific (may tweak)
         : API_BASE + "/booking/public"; //Public gets the hardcoded return
 
@@ -31,12 +62,14 @@ document.addEventListener('DOMContentLoaded', function () {
         buttonText: { today: 'This Week' },
 
         //Can click and drag to create events (if in as admin)
-        selectable: adminMode,
-        selectMirror: adminMode,
+        selectable: ADMIN_MODE,
+        selectMirror: ADMIN_MODE,
 
         events: async (fetchInfo, successCallback, failureCallback) => {
             try {
-                const res = await fetch(getURL);
+                const headers = ADMIN_MODE && ADMIN_AUTH ? { Authorization: ADMIN_AUTH } : {};
+                const res = await fetch(getURL, { headers });
+                // const res = await fetch(getURL);
                 if (!res.ok) throw new Error(`HTTP ${res.status}`);
                 const bookings = await res.json();
 
@@ -73,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Click and drag to create slots
         select: async function(info) {
             console.log('Clicked');
-            if (!adminMode) return; // only allow for admin
+            if (!ADMIN_MODE) return; // only allow for admin
 
             const options = {
                 weekday: 'short',
@@ -106,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function () {
         },
 
         eventClick: function (info) {
-            if (adminMode) {
+            if (ADMIN_MODE) {
                 openAdminModal(info.event); //adminModal.js
             } else {
                 openUserModal(info.event); //userModal.js
@@ -121,11 +154,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Shared JSON helper (admin & user can reuse)
 async function sendJSON(url, method, payload) {
+
+    const headers = { 'Content-Type': 'application/json' };
+    if (ADMIN_MODE && ADMIN_AUTH) headers['Authorization'] = ADMIN_AUTH;
+
     const res = await fetch(url, {
         method,
-        headers: { 'Content-Type': 'application/json' },
+        headers,
         body: JSON.stringify(payload)
     });
+
     if (!res.ok) {
         let msg = `HTTP ${res.status}`;
         try {

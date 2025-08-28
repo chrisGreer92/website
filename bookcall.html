@@ -12,19 +12,21 @@
 <body>
 <section class="highlight-box" style="max-width: 900px; margin: 2rem auto; position: relative;">
     <h2>Book a Call</h2>
-    <!-- <section class="highlight-box" aria-labelledby="project-summary"> -->
     <h2 id="project-summary">Full-stack call booking application.</h2>
     <ul>
         <li><strong>Backend:</strong> Java + Spring Boot, PostgreSQL</li>
         <li><strong>Frontend:</strong> HTML/JS using FullCalendar library</li>
         <li><strong>Ops:</strong> Containerised with Docker, deployed on Fly.io</li>
     </ul>
-    <!-- </section> -->
     <p>(see <a href="https://github.com/chrisGreer92/springbootApp">GitHub Project</a>).</p>
     <a class="button" href="index.html"
        style="position: absolute; top: 1rem; right: 1rem;">
         Home
     </a>
+    <button id="adminLoginBtn" class="button" 
+        style="position:absolute; top:1rem; right:7rem; background-color:#b30000; cursor:pointer; ">
+        Admin Mode
+    </button>
     <div id="calendar"></div>
     <!-- Hidden (User) Booking Box-->
     <div id="bookingModal" class="modal">
