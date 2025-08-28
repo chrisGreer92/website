@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Booking Calendar</title>
+    <link rel="stylesheet" href="style.css?v=2" />
+    <style>
+        .highlight-box h2 {text-decoration: none !important;}
+    </style>
+</head>
+<body>
+<section class="highlight-box" style="max-width: 900px; margin: 2rem auto; position: relative;">
+    <h2>Book a Call</h2>
+    <a class="button" href="index.html"
+       style="position: absolute; top: 1rem; right: 1rem;">
+        Home
+    </a>
+    <div id="calendar"></div>
+    <!-- Hidden (User) Booking Box-->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <h3>Book Slot</h3>
+            <form id="bookingForm">
+                <input type="hidden" name="slotId" id="slotId">
+
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" required>
+
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" required>
+
+                <label for="phone">Phone</label>
+                <input type="tel" name="phone" id="phone" pattern="^[0-9]{7,15}$" title="Must be 7–15 digits">
+
+                <label for="topic">Topic</label>
+                <input type="text" name="topic" id="topic">
+
+                <label for="notes">Notes</label>
+                <textarea name="notes" id="notes" rows="3"></textarea>
+
+                <div class="modal-actions">
+                    <button type="button" id="closeModal" class="button">Cancel</button>
+                    <button type="submit" class="button">Request</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Hidden Admin Box-->
+    <div id="adminModal" class="modal">
+        <div class="modal-content" style="position: relative;">
+
+            <button type="button" id="deleteBookingBtn" class="button"
+                    style="position: absolute; top: 1rem; right: 1rem; background-color: #b30000;"
+            >DELETE</button>
+            <h3>Update Booking</h3>
+
+            <input type="hidden" id="adminSlotId" />
+
+            <div class="field">
+                <label>Name</label>
+                <div id="adminName" class="readonly"></div>
+            </div>
+
+            <div class="field">
+                <label>Email</label>
+                <div id="adminEmail" class="readonly"></div>
+            </div>
+
+            <div class="field">
+                <label>Phone</label>
+                <div id="adminPhone" class="readonly"></div>
+            </div>
+
+            <div class="field">
+                <label>Topic</label>
+                <div id="adminTopic" class="readonly"></div>
+            </div>
+
+            <div class="field">
+                <label>Notes</label>
+                <div id="adminNotes" class="readonly"></div>
+            </div>
+
+            <div class="field">
+                <label for="adminStatus">Status</label>
+                <select id="adminStatus">
+<!--                    <option value="AVAILABLE">Available</option>-->
+                    <option value="PENDING">Pending</option>
+                    <option value="CONFIRMED">Confirmed</option>
+                    <option value="REJECTED">Rejected</option>
+                    <option value="CANCELLED">Cancelled</option>
+                </select>
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" id="closeAdminModal" class="button">Cancel</button>
+<!--                <button type="button" id="deleteBookingBtn" class="button" style="background-color: #b30000;">DELETE</button>-->
+                <button type="button" id="saveAdminStatus" class="button">Save</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FullCalendar JS -->
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+<!--My Scripts for general + User/Admin logic -->
+<script src="calendar.js"></script>
+<script src="userModal.js"></script>
+<script src="adminModal.js"></script>
+</body>
+</html>

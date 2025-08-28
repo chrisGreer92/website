@@ -1,6 +1,21 @@
 document.addEventListener('DOMContentLoaded', function () {
     const calendarEl = document.getElementById('calendar');
 
+    const params = new URLSearchParams(location.search);
+    const adminMode = params.get('admin') === 'true';
+
+    const getURL = adminMode
+        ? '/booking/admin?showPast=true&deleted=false&sort=startTime' //Admin gets specific (may tweak)
+        : '/booking/public'; //Public gets the hardcoded return
+
+    const statusColors = {
+        available: '#007bff',
+        pending: '#800080',
+        confirmed: '#3CB043',
+        rejected: '#ff0000',
+        cancelled: '#000000'
+    };
+
     const calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'timeGridWeek',
         height: 'auto',
@@ -11,18 +26,37 @@ document.addEventListener('DOMContentLoaded', function () {
         hiddenDays: [0, 6], // Hides Sat & Sun
         buttonText: { today: 'This Week' },
 
+        //Can click and drag to create events (if in as admin)
+        selectable: adminMode,
+        selectMirror: adminMode,
+
         events: async (fetchInfo, successCallback, failureCallback) => {
             try {
-                const res = await fetch('/booking?status=AVAILABLE&deleted=false&sort=startTime');
+                const res = await fetch(getURL);
                 if (!res.ok) throw new Error(`HTTP ${res.status}`);
                 const bookings = await res.json();
 
-                const events = bookings.map(b => ({
-                    id: b.id,
-                    title: b.topic || 'Available',
-                    start: b.startTime,
-                    end: b.endTime
-                }));
+                const events = bookings.map(b => {
+                    const statusLower = b.status.toLowerCase();
+                    const statusFormatted = statusLower.charAt(0).toUpperCase() + statusLower.slice(1);
+
+                    return {
+                        id: b.id,
+                        title: b.topic ? b.topic : statusFormatted,
+                        start: b.startTime,
+                        end: b.endTime,
+                        color: statusColors[statusLower] || '#808080',
+                        //Props for admin
+                        extendedProps: {
+                            status: b.status,
+                            name: b.name,
+                            email: b.email,
+                            phone: b.phone,
+                            topic: b.topic,
+                            notes: b.notes
+                        }
+                    };
+                });
 
                 console.log('Loaded events:', events);
                 successCallback(events);
@@ -32,76 +66,72 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         },
 
-        eventClick: function (info) {
-            // Get relevent slot
-            document.getElementById('slotId').value = info.event.id;
-            document.querySelector('#bookingForm input[name="topic"]')
-                .value = info.event.title !== 'Available' ? info.event.title : '';
+        // Click and drag to create slots
+        select: async function(info) {
+            console.log('Clicked');
+            if (!adminMode) return; // only allow for admin
 
-            // Show Popover
-            document.getElementById('bookingModal').style.display = 'flex';
-        }
-    });
+            const options = {
+                weekday: 'short',
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            };
 
-    calendar.render();
+            const startReadable = new Date(info.startStr).toLocaleString(undefined, options);
+            const endReadable   = new Date(info.endStr).toLocaleString(undefined, options);
 
-    // Popover setup
-    const bookingModal = document.getElementById('bookingModal');
-    const closeModalBtn = document.getElementById('closeModal');
-    const bookingForm = document.getElementById('bookingForm');
-
-    // Close button
-    closeModalBtn.addEventListener('click', function () {
-        bookingModal.style.display = 'none';
-        bookingForm.reset();
-    });
-
-    // Handle Request
-    bookingForm.addEventListener('submit', async function (e) {
-        e.preventDefault();
-
-        const formData = Object.fromEntries(new FormData(bookingForm).entries());
-
-        try {
-            const res = await fetch(`/booking/${formData.slotId}/request`, {
-                method: 'PATCH',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    name: formData.name,
-                    email: formData.email,
-                    phone: formData.phone,
-                    topic: formData.topic,
-                    notes: formData.notes
-                })
-            });
-
-            // Handle backend and potential errors
-            if (!res.ok) {
-                let errorMessage = `HTTP ${res.status}`;
-                try {
-                    const errorJson = await res.json();
-                    const firstKey = Object.keys(errorJson)[0];
-                    if (firstKey) {
-                        errorMessage = errorJson[firstKey];
-                    }
-                } catch {
-                    errorMessage = await res.text();
-                }
-                console.error('Booking failed:', errorMessage);
-                alert(`Failed to book slot.\n${errorMessage}`);
+            if (!confirm(`Create Available slot?:\nStart: ${startReadable}\nEnd:   ${endReadable}`)) {
+                calendar.unselect();
                 return;
             }
 
-            // Success!
-            alert('Booking Requested!');
-            bookingModal.style.display = 'none';
-            bookingForm.reset();
-            calendar.refetchEvents();
+            try {
+                await sendJSON('/booking/admin', 'POST', {
+                    startTime: info.startStr,
+                    endTime: info.endStr
+                });
+                calendar.refetchEvents();
+            } catch (err) {
+                alert(`Failed to create slot. ${err.message || err}`);
+            } finally {
+                calendar.unselect();
+            }
+        },
 
-        } catch (err) {
-            // Handle fetch/network errors
-            console.error('Booking request error:', err);
-            alert(`Failed to book slot. ${err.message || err}`);
+        eventClick: function (info) {
+            if (adminMode) {
+                openAdminModal(info.event); //adminModal.js
+            } else {
+                openUserModal(info.event); //userModal.js
+            }
         }
+
     });
+    window.calendar = calendar;
+    calendar.render();
+
 });
+
+// Shared JSON helper (admin & user can reuse)
+async function sendJSON(url, method, payload) {
+    const res = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+    });
+    if (!res.ok) {
+        let msg = `HTTP ${res.status}`;
+        try {
+            const errorJson = await res.json();
+            const firstKey = Object.keys(errorJson)[0];
+            if (firstKey) msg = errorJson[firstKey];
+        } catch {
+            msg = await res.text();
+        }
+        throw new Error(msg);
+    }
+    return res.json().catch(() => ({}));
+}
