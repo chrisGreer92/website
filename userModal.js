@@ -18,7 +18,12 @@ bookingForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const formData = Object.fromEntries(new FormData(bookingForm).entries());
 
+    const submitBtn = bookingForm.querySelector("button[type='submit']");
+    if (submitBtn.disabled) return;
+
     try {
+        submitBtn.disabled = true;
+
         await sendJSON(API_BASE + "/booking/request/" + formData.slotId,
             'PATCH', {
             name: formData.name,
@@ -33,5 +38,7 @@ bookingForm.addEventListener('submit', async (e) => {
         calendar.refetchEvents();
     } catch (err) {
         alert(`Failed to book slot. ${err.message || err}`);
+    } finally {
+        submitBtn.disabled = false;
     }
 });
