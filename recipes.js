@@ -1,6 +1,7 @@
 // ---------------- Configuration ----------------
 const API_BASE = 'https://recipeengine.fly.dev';
 const INGEST_API_URL = 'https://recipeengine.fly.dev/recipes/ingest';
+let ADMIN_AUTH = sessionStorage.getItem('ADMIN_AUTH') || null;
 
 // ---------------- Helpers ----------------------
 const api = (p) => (API_BASE ? API_BASE.replace(/\/$/, '') : '') + p;
@@ -13,28 +14,57 @@ document.addEventListener('DOMContentLoaded', () => {
   if (qs('#recipeTitle')) { loadDetail(); }
 });
 
-// --------------- Gumloop Send -------------------
+// ---------------  Send via Spring to be Processed -------------------
 function wireGlobalSend(){
   const btn = qs('#globalSendBtn'); if (!btn) return;
   const input = qs('#globalUrl'), status = qs('#globalSendStatus');
+
   btn.addEventListener('click', async () => {
     const toSend = (input?.value || '').trim();
     if (!toSend){ text(status,'Please enter a URL first.'); return; }
     if (!INGEST_API_URL){ text(status,'EXTERNAL_API_URL not set.'); return; }
+
     try {
       text(status,'Sending...');
-      const resp = await fetch(INGEST_API_URL, {
+
+      // prepare headers
+      const headers = { 'Content-Type': 'application/json' };
+      if (ADMIN_AUTH) headers['Authorization'] = ADMIN_AUTH;
+
+      // first attempt
+      let resp = await fetch(INGEST_API_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers,
         body: JSON.stringify({ url: toSend })
       });
+
+      // if unauthorized, prompt and retry
+      if (resp.status === 401 && !ADMIN_AUTH) {
+        const u = prompt("Admin username:");
+        const p = prompt("Admin password:");
+        if (u && p) {
+          ADMIN_AUTH = "Basic " + btoa(u + ":" + p);
+          sessionStorage.setItem('ADMIN_AUTH', ADMIN_AUTH);
+
+          resp = await fetch(INGEST_API_URL, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': ADMIN_AUTH
+            },
+            body: JSON.stringify({ url: toSend })
+          });
+        }
+      }
+
       if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-      text(status,'Sent ✓');
+      text(status,'Sent to be processed. Please refresh in 30 seconds.');
     } catch (e) {
-      text(status, e.message || 'Failed to send.');
+      text(status, 'Unsuccessful, please contact administrator.');
     }
   });
 }
+
 
 // --------------- List page ---------------------
 async function loadList(){
