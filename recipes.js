@@ -58,12 +58,18 @@ function wireGlobalSend(){
       }
 
       if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-      text(status,'Sent to be processed. Please refresh in 30 seconds.');
+
+      // success: clear inline status, show popup
+      text(status,'');
+      alert('Sent to be processed. Please refresh page in 1-2 minutes.');
     } catch (e) {
-      text(status, 'Unsuccessful, please contact administrator.');
+      // failure: clear inline status, show popup
+      text(status,'');
+      alert('Unsuccessful, please contact administrator.');
     }
   });
 }
+
 
 
 // --------------- List page ---------------------
