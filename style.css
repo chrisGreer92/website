@@ -226,6 +226,87 @@
     gap: 0.5rem;
   }
 
+  /* ===== Recipe page ===== */
+  .recipe-page .recipe-container {
+    /* replaces the inline style you had on <section> */
+    max-width: 1100px;
+    margin: 1.5rem auto;
+  }
+
+  /* Buttons row spacing */
+  .recipe-page .recipe-top-row {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  /* Two-column layout (ingredients+info | instructions+details) */
+  .recipe-page .recipe-grid-2col {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr; /* left narrower, right wider */
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+    align-items: start;
+  }
+  @media (max-width: 900px){
+    .recipe-page .recipe-grid-2col { grid-template-columns: 1fr; }
+  }
+
+  /* Outlined containers (panels & ingredients) */
+  .recipe-page .recipe-panel,
+  .recipe-page .recipe-ingredients {
+    border: 1px solid #fff;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    background: transparent; /* you can swap to #007acc later if desired */
+  }
+
+  /* Ingredients list */
+  .recipe-page .recipe-ingredients ul {
+    margin: 0;
+    padding-left: 1.25rem;
+    list-style: disc;
+  }
+  .recipe-page .recipe-ingredients li {
+    margin-bottom: 0.4rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px dashed #eee;
+  }
+  .recipe-page .recipe-ingredients li:last-child {
+    border-bottom: none; /* no underline on last ingredient */
+  }
+
+  /* Instructions block (match ingredients typography) */
+  .recipe-page .recipe-instructions {
+    white-space: pre-wrap;
+    margin: 0;
+  }
+
+  /* Metadata table */
+  .recipe-page .recipe-kv {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .recipe-page .recipe-kv th,
+  .recipe-page .recipe-kv td {
+    padding: .45rem .6rem;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px dashed #eee;
+  }
+  .recipe-page .recipe-kv th {
+    width: 22ch;
+    font-weight: 600;
+  }
+  
+  /* No underline on last row – matches ingredients box */
+  .recipe-page .recipe-kv tr:last-child th,
+  .recipe-page .recipe-kv tr:last-child td {
+    border-bottom: none;
+  }
+
   
   /* .project-item video {
     width: 100%;
