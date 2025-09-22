@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recipe</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="recipe-page">
+<header>
+  <h1 id="recipeTitle">Recipe</h1>
+</header>
+
+<section class="highlight-box recipe-container">
+  <!-- Buttons row -->
+  <div class="recipe-top-row">
+    <a class="button" href="recipes.html">← Back to list</a>
+    <a id="sourceLink" class="button" href="#" target="_blank" rel="noopener">Source</a>
+  </div>
+
+  <div id="detailError" role="alert" style="display:none; margin:.75rem 0; color:#a00;"></div>
+
+  <!-- Overview -->
+  <article>
+    <!-- Optional heading removed per your version -->
+    <p id="recipeDescription" class="meta"></p>
+  </article>
+
+  <!-- Ingredients / Instructions -->
+  <div class="recipe-grid-2col">
+    <div>
+      <h3>Ingredients</h3>
+      <div class="recipe-ingredients">
+        <ul id="ingredientsList"></ul>
+      </div>
+
+      <h3>Info</h3>
+      <div class="recipe-panel">
+        <table class="recipe-kv" id="metaTable"></table>
+      </div>
+    </div>
+
+    <div>
+      <h3>Instructions</h3>
+      <div class="recipe-panel">
+        <div id="instructions" class="recipe-instructions"></div>
+      </div>
+
+      <h3></h3>
+      <div class="recipe-panel">
+        <dl>
+          <dt class="meta">Created</dt>
+          <dd id="createdAt" class="meta"></dd>
+          <dt class="meta">URL</dt>
+          <dd id="recipeUrl" class="meta"></dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="recipes.js"></script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recipes</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .recipes-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+    .recipes-table th, .recipes-table td { padding: 0.6rem; border-bottom: 1px solid #eee; vertical-align: top; }
+    .recipes-table th { text-align: left; }
+    .col-title { width: 50%; }
+    .col-short { width: 8ch; }
+    .col-medium { width: 14ch; }
+    .meta { font-size: 0.9em; color: #667; }
+    .row-actions { display: flex; gap: 0.5rem; align-items: center; }
+    .url-input { width: 28ch; max-width: 50vw; }
+    .center { text-align:center; }
+    .recipes-table th:not(.col-title),
+    .recipes-table td:not(.title) {
+      text-align: center;
+    }
+  </style>
+
+</head>
+<body>
+  <header>
+    <h1>Chris' Recipe Engine</h1>
+  </header>
+
+  <section class="highlight-box" style="max-width: 1100px; margin: 1.5rem auto;">
+    <div style="display:flex; justify-content: space-between; align-items: center; gap:1rem; flex-wrap: wrap;">
+      <h2 style="margin: 0;">Added Recipes</h2>
+      <div class="row-actions">
+        <input id="globalUrl" type="url" class="url-input" placeholder="https://example.com..." aria-label="URL to send">
+        <button id="globalSendBtn" class="button" type="button">Add New</button>
+        <span id="globalSendStatus" class="meta" aria-live="polite"></span>
+      </div>
+    </div>
+
+    <div id="listError" role="alert" style="display:none; margin:.75rem 0; color:#a00;"></div>
+
+    <div style="overflow-x:auto;">
+      <table class="recipes-table" aria-describedby="recipesCount">
+        <thead>
+          <tr>
+            <th class="col-title">Title</th>
+            <th class="col-medium">Diet Type</th>
+            <th class="col-short center">GF</th>
+            <th class="col-short">Prep</th>
+            <th class="col-short">Cook</th>
+            <th class="col-short">Total</th>
+            <th class="col-short">Serves</th>
+            <th class="col-short">Open</th>
+          </tr>
+        </thead>
+        <tbody id="recipesTbody">
+          <!-- Filled by recipes.js -->
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <template id="recipe-row-template">
+    <tr>
+      <td class="title"></td>
+      <td class="dietType"></td>
+      <td class="gf center"></td>
+      <td class="prep"></td>
+      <td class="cook"></td>
+      <td class="total"></td>
+      <td class="serves"></td>
+      <td><a class="button" data-view-link target="_self">View</a></td>
+    </tr>
+  </template>
+
+  <script src="recipes.js"></script>
+</body>
+</html>
