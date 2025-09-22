@@ -1,6 +1,6 @@
 // ---------------- Configuration ----------------
-const API_BASE = ''; // Set chrisgreer.uk etc
-const EXTERNAL_API_URL = ''; // Set gumloop api
+const API_BASE = 'https://recipeengine.fly.dev';
+const INGEST_API_URL = 'https://recipeengine.fly.dev/recipes/ingest';
 
 // ---------------- Helpers ----------------------
 const api = (p) => (API_BASE ? API_BASE.replace(/\/$/, '') : '') + p;
@@ -20,10 +20,10 @@ function wireGlobalSend(){
   btn.addEventListener('click', async () => {
     const toSend = (input?.value || '').trim();
     if (!toSend){ text(status,'Please enter a URL first.'); return; }
-    if (!EXTERNAL_API_URL){ text(status,'EXTERNAL_API_URL not set.'); return; }
+    if (!INGEST_API_URL){ text(status,'EXTERNAL_API_URL not set.'); return; }
     try {
       text(status,'Sending...');
-      const resp = await fetch(EXTERNAL_API_URL, {
+      const resp = await fetch(INGEST_API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url: toSend })
