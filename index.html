@@ -185,7 +185,7 @@
         <span>Iterative Fixes</span>
       </div>
       <div class="project-wrapper">
-        <video controls>
+        <video id="snake-video" controls>
           <source src="media/SnakeDemo.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
@@ -204,13 +204,19 @@
   </footer>
   
   <script>
-    //To avoid ears being blown out, default volume is 30%
+    //To avoid ears being blown out, default volume is 50%
     window.addEventListener('DOMContentLoaded', () => {
       const videos = document.querySelectorAll('video');
       videos.forEach(video => {
-        video.volume = 0.3;
+        video.volume = 0.5;
       });
+      const snakeVideo = document.getElementById('snake-video');
+      if (snakeVideo) {
+        snakeVideo.volume = 0.1; //Snake video is especially loud...
+      }
     });
+
+    
   </script>
 </body>
 </html>
